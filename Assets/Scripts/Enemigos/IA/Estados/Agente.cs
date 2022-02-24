@@ -19,6 +19,8 @@ public class Agente : MonoBehaviour
     public Detectar estadoDetectar;
     //--------------------------------------------------------------------------------------------
     public GameObject player;
+
+    //Guardar ultima posicion conocida.
     
     private void Awake (){
         estadoIdle = GetComponent <Idle>();
