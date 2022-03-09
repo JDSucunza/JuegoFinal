@@ -11,7 +11,7 @@ public class Buscar : MonoBehaviour
     
     void OnEnable (){
         //Sonido cuando empiezo a buscar.
-        this.agent.estadoIdle.enabled = false; 
+       // this.agent.estadoIdle.enabled = false; 
         this.agent.estadoRecorrer.enabled = false;
         this.agent.anim.SetBool ("Walk", true);
         this.agent.anim.SetBool ("Idle", false);

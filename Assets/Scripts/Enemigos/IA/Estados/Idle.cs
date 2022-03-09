@@ -14,6 +14,7 @@ public class Idle : MonoBehaviour
         agent = GetComponent <Agente> ();
             }
     void OnEnable (){
+        this.agent.anim.SetBool ("Idle", true);
         tempo = 0;
     }
     
