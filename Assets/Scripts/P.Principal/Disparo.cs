@@ -8,13 +8,14 @@ public class Disparo : MonoBehaviour
     public LayerMask layers;
     public float cooldown = 0.5f;
     public float _cooldown;
+    public float duration = 2f;
 
     private void Update(){
         if(Input.GetButtonDown("Fire1") && this._cooldown <= 0){
             this._cooldown = this.cooldown;
             RaycastHit hit;
             bool choco = Physics.Raycast(Camera.main.transform.position, this.transform.forward, out hit, this.rayDistance, this.layers);
-            Debug.DrawRay(this.transform.position, this.transform.forward * this.rayDistance, Color.red, duration: 2f);
+            Debug.DrawRay(this.transform.position, this.transform.forward * this.rayDistance, Color.red, duration: duration);
             if(choco){
                 if(hit.collider.CompareTag("Enemy")){
                     Debug.Log("Choque contra un enemigo");

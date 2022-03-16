@@ -5,9 +5,13 @@ using UnityEngine;
 public class DetectorSonido : MonoBehaviour
 {
     private Agente agent;
-    public int alcance;
+    public int rangoSonidosFuertes;
 
-    private Collider[] colliders;
+    public int rangoSonidosSuaves;
+
+    private Collider[] collidersSonidosFuertes;
+
+    private Collider [] collidedrsSonidosSuaves;
 
     public LayerMask layers;
     
@@ -24,8 +28,40 @@ public class DetectorSonido : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        colliders = Physics.OverlapSphere (transform.position, 10, layers);
+        // El unico layer es el player por ahora.
+        collidersSonidosFuertes = Physics.OverlapSphere (transform.position, rangoSonidosFuertes, layers);
+        collidedrsSonidosSuaves = Physics.OverlapSphere (transform.position, rangoSonidosSuaves, layers);
+        
+        if (EscuchoAlPlayerCorriendo ()){
+            Debug.Log ("Escuche Al Player, lo voy a buscar.");
+        } else if (EscuchoCercaAlPlayer()){
+                Debug.Log ("Reaccion al Player cerca.");
+            }
+    
     }
 
-  
+    
+
+    private bool EscuchoAlPlayerCorriendo (){
+        return (PlayerEnRangoCorriendo() && EstaCorriendo ());
+    }
+    private bool PlayerEnRangoCorriendo(){
+        return (collidersSonidosFuertes.Length > 0);
+    }
+
+    private bool EstaCorriendo (){
+        return (agent.playerMovimiento.corriendo);
+    }
+
+    private bool EscuchoCercaAlPlayer (){
+        return (collidedrsSonidosSuaves.Length > 0);
+    }
+
+    void OnDrawGizmos (){
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere (transform.position, rangoSonidosFuertes);
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere (transform.position, rangoSonidosSuaves);
+    }
+
 }

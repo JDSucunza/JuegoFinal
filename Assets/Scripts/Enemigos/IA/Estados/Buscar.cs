@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,9 +11,10 @@ public class Buscar : MonoBehaviour
     
     void OnEnable (){
         //Sonido cuando empiezo a buscar.
-       // this.agent.estadoIdle.enabled = false; 
+        //No activa las animaciones.
+        this.agent.estadoIdle.enabled = false; 
         this.agent.estadoRecorrer.enabled = false;
-        this.agent.anim.SetBool ("Walk", true);
+        this.agent.anim.SetBool ("CrouchedWalk", true);
         this.agent.anim.SetBool ("Idle", false);
         this.agent.nma.SetDestination (agent.player.transform.position);
     }

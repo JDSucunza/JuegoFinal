@@ -7,27 +7,59 @@ public class Agente : MonoBehaviour
 {
     [HideInInspector]
     public NavMeshAgent nma;
-
+   
     [HideInInspector]
     public Animator anim;
-    // Lista de Estados:
+    //--------------------------------------------------------------------------------------------
+    // Sensores:
+    [HideInInspector]
+    public DetectorSonido detectarSonido; 
+    //--------------------------------------------------------------------------------------------
+    // Estados:
     [HideInInspector]
     public Idle estadoIdle;
     [HideInInspector]
     public Recorrer estadoRecorrer;
     [HideInInspector]
-    public Detectar estadoDetectar;
+    public IdleAlerta estadoIdleAlerta;
     //--------------------------------------------------------------------------------------------
+    //Player:
+    [HideInInspector]
     public GameObject player;
+    //[HideInInspector]
+    //public PlayerController playerController;
+    
+    //public RaycastFollowPlayer raycastFollowPlayer;
+    
+    public bool rayoPegoAlPlayer = false;
 
-    //Guardar ultima posicion conocida.
+    
+    [HideInInspector]
+    public Movimiento playerMovimiento;
+    
     
     private void Awake (){
-        estadoIdle = GetComponent <Idle>();
-        estadoRecorrer = GetComponent <Recorrer>();
-        estadoDetectar = GetComponent <Detectar> ();
-        nma = GetComponent <NavMeshAgent> ();
-        anim = GetComponent <Animator> ();
+      
+      this.nma = GetComponent <NavMeshAgent> ();
+      this.anim = GetComponent <Animator> ();
+      //--------------------------------------------------------------------------------------------
+      //Sensores:
+      this.detectarSonido = GetComponent <DetectorSonido> ();
+
+      //--------------------------------------------------------------------------------------------
+      //Estados:
+      this.estadoIdleAlerta = GetComponent <IdleAlerta> ();
+      this.estadoIdle = GetComponent <Idle>();
+      this.estadoRecorrer = GetComponent <Recorrer>();
+      //--------------------------------------------------------------------------------------------
+      //Player:
+      
+      this.player = GameObject.FindGameObjectWithTag ("Player");
+      
+      //  this.playerController = GetComponent <PlayerController> ();
+      // this.raycastFollowPlayer = GetComponentInChildren <RaycastFollowPlayer> ();
+      this.playerMovimiento = player.GetComponent <Movimiento> ();
+      
     }
     // Start is called before the first frame update
     void Start()
